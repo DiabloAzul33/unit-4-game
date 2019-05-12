@@ -2,11 +2,15 @@ h1 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.container {
-    position: center;
-    width: 80%;
+body {
+    background-color: blueviolet;
+}
+.coin {
+    height: 50px;
+    width: 50px;
 }
 
-.coin-image {
-    size: 200px;
+#superb-mario-image {
+    height: 200px;
+    width: 200px;
 }

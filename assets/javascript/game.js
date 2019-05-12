@@ -1,46 +1,78 @@
 var targetScore = Math.round(Math.random() * (120 - 19) + 19); // randomized variable for target # player is trying to achieve (b/w 19-120)
-    
 $("#target-number").text(targetScore); // displays target # on page
 
 var counter = 0; // value points will increase by different increments here, starts at zero
+var wins = 0; // tallies score wins/losses, starting value of both at zero unless page refreshed
+var losses = 0;
 
-var numberOptions = [12,7,4,9]; // assigns different # values to each coin - randomized (b/w 1-12)
-    Math.round(Math.random() * 12 + 1);
-var images = ["unit-4-game/assets/images/Blue_Coins.jpg", "images/Gold_Star_Coins.jpg", "images/Green_Coins.jpg" , "images/Red_Coin.png"]; // array of images length of # value array
+var goldCoin = 0;
+var blueCoin = 0;
+var redCoin = 0;
+var rainbowCoin = 0;
 
-for (var i = 0; i < numberOptions.length; i++){  // for loop thru the array of # options
-
-    var imageCoin = $("<img>"); // creates new image set to each coin
-
-    imageCoin.addClass("coin-image"); // new class for each coin
-
-    imageCoin.attr("src", images[i]); //link to coin images
-        
-    imageCoin.attr("data-coinvalue", numberOptions[i]); // coin data set value set to array value
-
-    $("#coins").append(imageCoin); // displays on page after for loop goes thru and adds class/image for each coin
-
+function generateRandomNumber(){
+    return Math.floor(Math.random() * 12 +1);
 }
 
-$(".coin-image").on("click", function() { // on click event for coin images
+function updateScore(){
+    $("#current-score").text(counter);
+    $("#win-record").text(wins);
+    $("#loss-record").text(losses);
+}
 
-    var coinValue = ($(this).attr("data-coinvalue"));
+function checkScore(){
+    if (counter === targetScore) {
+        wins++;
+        $("#win-record").text(wins);
 
-    coinValue = parseInt(coinValue); // changes string values from HTML to integers for counter
-
-    counter += coinValue; // changes by the varied increments values stored in coinValue
-
-    alert("New score: " + counter); // alert out as score changes
-
-    if (counter === targetScore) {   
-      alert("You are Superb! You win!");  // hit target score, alert win
+        alert("You are Superb! You win!");  // hit target score, alert win
+    } else if (counter > targetScore) {
+        losses++;
+        $("#loss-record").text(losses);
+        alert("Sorry, better luck next time!"); // goes above target score, alert loss
     }
+}
 
-    else if (counter >= targetScore) {
-      alert("Sorry, better luck next time!"); // goes above target score, alert loss
-    }
+function initializeGame(){
+    goldCoin = generateRandomNumber();
+    blueCoin = generateRandomNumber();
+    redCoin = generateRandomNumber();
+    rainbowCoin = generateRandomNumber();
+}
+initializeGame();
 
-});
+$("#blue-coin").on("click", function (){
+    console.log("Blue coin clicked.");
+    console.log(blueCoin);
+    counter = counter + blueCoin;
+    console.log(counter);
+    updateScore();
+    checkScore();
+})
+
+$("#gold-coin").on("click", function (){
+    console.log("gold coin clicked.");
+    counter = counter + goldCoin;
+    console.log(goldCoin);
+    updateScore();
+    checkScore();
+})
+
+$("#red-coin").on("click", function (){
+    console.log("red coin clicked.");
+    counter = counter + redCoin;
+    console.log(redCoin);
+    updateScore();
+    checkScore();
+})
+
+$("#rainbow-coin").on("click", function (){
+    console.log("rainbow coin clicked.");
+    counter = counter + rainbowCoin;
+    console.log(rainbowCoin);
+    updateScore();
+    checkScore();
+})
 
  // reset counter after win/loss alerts w/o refreshing
  // wins/losses counter, changes after each round
