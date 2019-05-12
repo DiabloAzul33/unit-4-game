@@ -6,3 +6,7 @@ h1 {
     position: center;
     width: 80%;
 }
+
+.coin-image {
+    size: 50 x 50px;
+}
