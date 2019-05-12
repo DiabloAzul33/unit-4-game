@@ -1,10 +1,11 @@
-var targetScore = 61; // randomized variable for target # player is trying to achieve
-    Math.round(Math.random())
+var targetScore = Math.round(Math.random() * (120 - 19) + 19); // randomized variable for target # player is trying to achieve (b/w 19-120)
+    
 $("#target-number").text(targetScore); // displays target # on page
 
 var counter = 0; // value points will increase by different increments here, starts at zero
 
-var numberOptions = [12,7,4,9]; // assigns different # values to each coin - randomized
+var numberOptions = [12,7,4,9]; // assigns different # values to each coin - randomized (b/w 1-12)
+    Math.round(Math.random() * 12 + 1);
 var images = ["unit-4-game/assets/images/Blue_Coins.jpg", "images/Gold_Star_Coins.jpg", "images/Green_Coins.jpg" , "images/Red_Coin.png"]; // array of images length of # value array
 
 for (var i = 0; i < numberOptions.length; i++){  // for loop thru the array of # options
@@ -14,20 +15,6 @@ for (var i = 0; i < numberOptions.length; i++){  // for loop thru the array of #
     imageCoin.addClass("coin-image"); // new class for each coin
 
     imageCoin.attr("src", images[i]); //link to coin images
-        
-    imageCoin.attr("data-coinvalue", numberOptions[i]); // coin data set value set to array value
-
-    $("#coins").append(imageCoin); // displays on page after for loop goes thru and adds class/image for each coin
-
-}
-
-for (var i = 0; i < numberOptions.length; i++){  // for loop thru the array of # options
-
-    var imageCoin = $("<img>"); // creates new image set to each coin
-
-    imageCoin.addClass("coin-image"); // new class for each coin
-
-    imageCoin.attr("src", ""); //link to coin images
         
     imageCoin.attr("data-coinvalue", numberOptions[i]); // coin data set value set to array value
 
@@ -60,3 +47,4 @@ $(".coin-image").on("click", function() { // on click event for coin images
  // reset coin values 
  // link images each to different coin
  // directions for game at top of screen
+ // add a sound to each click on a coin
